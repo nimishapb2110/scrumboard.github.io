@@ -1,0 +1,15 @@
+.create-item-container{
+    border: 1px solid green; //to be removed
+}
+
+.create-item-form{
+    display: flex;
+    flex-direction: column;
+}
+
+.btn-toolbar{
+    button {
+        flex: 1;
+        margin: 5px;
+    }
+}

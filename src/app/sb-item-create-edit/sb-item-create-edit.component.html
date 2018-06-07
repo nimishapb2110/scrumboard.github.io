@@ -1,0 +1,22 @@
+<form class="create-item-container" #createSbItemForm="ngForm" (ngSubmit)="createSbItem();">
+    <div class="create-item-form">
+      <mat-form-field>
+          <input matInput [(ngModel)]="sbItemModel.title" placeholder="Title" name="sbItemTitle" required>
+      </mat-form-field>
+      <mat-form-field>
+          <textarea  matInput [(ngModel)]="sbItemModel.description" placeholder="Description" name="sbItemDecription"></textarea>
+      </mat-form-field>
+      <mat-form-field>
+          <textarea  matInput [(ngModel)]="sbItemModel.storyPoints" placeholder="Story Points" name="sbItemStoryPoints"></textarea>
+      </mat-form-field>
+      <mat-form-field>
+          <mat-select placeholder="Select Issue Type"  [(ngModel)]="sbItemModel.issueTypeName" name="sbItemTsype">
+            <mat-option *ngFor="let type of sbIssueTypeList" [value]="type.name">{{ type.name }}</mat-option>
+          </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="btn-toolbar">
+        <button class="btn btn-primary" [disabled]="!createSbItemForm.valid">Add</button>
+        <button mat-button class="btn btn-primary" type="button" (click)="onCancelClick()">Cancel</button>
+    </div> 
+</form>
