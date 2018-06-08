@@ -12,11 +12,4 @@ export class ScrumBoardService{
       getSbModel(){
           return this.issueTypeModel;
       }
-      
-      getSbTypeCode(name: string){
-        for(let i=0; i<this.issueTypeModel.length; i++){
-          if(this.issueTypeModel[i].name === name) 
-            return this.issueTypeModel[i].code;
-        }
-      }
 }
