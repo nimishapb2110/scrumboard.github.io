@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { NgRedux, select } from '@angular-redux/store';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 import { ScrumBoardItem, IssueType } from '../shared/sb.model';
 import { ScrumBoardService } from '../shared/sb.service';
 import { IAppState } from '../shared/redux-store';
-import { ADD_ITEM_TO_BACKLOG } from '../shared/redux-actions';
-import { MatDialogRef } from '@angular/material';
+import { ADD_ITEM_TO_BACKLOG, UPDATE_ITEM } from '../shared/redux-actions';
 
 @Component({
   selector: 'app-sb-item-create-edit',
@@ -13,28 +13,42 @@ import { MatDialogRef } from '@angular/material';
   styleUrls: ['./sb-item-create-edit.component.scss']
 })
 export class SbItemCreateEditComponent implements OnInit {
-  sbIssueTypeList: IssueType[];
+  
+  sbIssueTypeList: IssueType[] = [];
   sbItemModel: ScrumBoardItem = {
     id:0,
     title: "",
     description: "",
     storyPoints: "",
-    issueTypeName: "",
-    issueTypeCode: "",
+    issueType: this.sbIssueTypeList[0],
     category: ""
   };
 
   constructor(private sbService:ScrumBoardService, 
               private ngRedux: NgRedux<IAppState>, 
-              public dialogRef: MatDialogRef<SbItemCreateEditComponent>) {
+              public dialogRef: MatDialogRef<SbItemCreateEditComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: any) {
     this.sbIssueTypeList = this.sbService.getSbModel(); 
-   }
+    console.log(this.data);
+    if(this.data.selectedItem) 
+    {
+      const copy = { ...this.data.selectedItem }
+      this.sbItemModel = copy ;
+    }
+  }
 
   ngOnInit() {
   }
 
   createSbItem(){
-    this.ngRedux.dispatch({type: ADD_ITEM_TO_BACKLOG, backlog: this.sbItemModel});
+    this.ngRedux.dispatch({type: ADD_ITEM_TO_BACKLOG, newSbItem: this.sbItemModel});
+    this.onCancelClick();
+  }
+
+  onUpdateClick(){
+    console.log(this.sbItemModel.id);
+    debugger;
+    this.ngRedux.dispatch({type: UPDATE_ITEM, modifiedSbItem: this.sbItemModel });
     this.onCancelClick();
   }
 
@@ -42,3 +56,5 @@ export class SbItemCreateEditComponent implements OnInit {
     this.dialogRef.close();
   }
 }
+
+

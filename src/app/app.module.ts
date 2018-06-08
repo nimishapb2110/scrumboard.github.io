@@ -1,11 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatIconModule, MatFormFieldModule, MatInputModule, MatSelectModule } from '@angular/material';
-import { MatDialogModule } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
 import { NgRedux, NgReduxModule } from '@angular-redux/store';
 import { NgxDnDModule } from '@swimlane/ngx-dnd';
+import { MatIconModule, MatFormFieldModule, MatInputModule, MatSelectModule } from '@angular/material';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
 import { MatTooltipModule } from '@angular/material/tooltip';
 

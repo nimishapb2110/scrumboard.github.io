@@ -1,5 +1,4 @@
 
-
 .sb-overview-container{
     left: 0;
     right: 0;
@@ -10,20 +9,16 @@
     flex-direction: row;
     flex-wrap: wrap;
     position: absolute;
-   // border: solid 1px pink; //to be removed
     > div{
-        border: solid 1px grey; //to be removed
+        border: solid 1px grey;
         position: relative;
         margin: 5px;
-        width: calc(15% - 10px);
-       // width: 200px;
-        height: 90%;
-      //  height: 400px;
+        width: calc(16.5% - 10px);
+        height: 98%;
     }
 }
 
 .sb-item-column-container{
-   // border: solid 1px yellow; //to be removed
     display: flex;
     flex-direction: column;
     position: absolute;
@@ -33,7 +28,6 @@
         font-weight: bold;
         overflow-y: auto;
         position: relative;
-      //  flex: 1;
         padding: 10px;
     }
     .sb-item-column-body{
@@ -41,15 +35,10 @@
         overflow-y: auto;
         position: relative;
         flex: 1;
-        //padding: 10px;
-      //  border: solid 1px red; //to be removed
     }
 }
 
 .sb-item-collection-holder{
-    
-   // border: solid 1px pink; //to be removed
-
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -64,27 +53,39 @@
 .mat-card{
     padding: 0;
     margin: 10px;
-    background-color: blue;
+    padding: 5px;
+    .mat-card-header{
+        display: flex;
+        flex-direction: column;
+    }
+    .mat-card-title{
+        font-weight: bold;
+        margin: 0;
+        padding: 0;
+    }
 }
 
-.backlog{
-    background-color: green;
-} 
+.mat-card-header-text{
+    margin: 0;
+}
 
 .category.user-story{
-    background-color:  #efec46;
-  }
-  .category.bug{
-    border-left:6px solid #35d8e6;
-  }
-  .category.task{
-    border-left:6px solid #7dd438;
-  }
-  .category.spike{
-    border-left:6px solid #ffa500;
-  }
+    background-color:  #deef46;
+}
 
-  .aligned-with-icon{
+.category.bug{
+    background-color: #fda775;
+}
+
+.category.task{
+    background-color: #52d438;
+}
+
+.category.spike{
+    background-color: #00e1ff;
+}
+
+.aligned-with-icon{
     position: relative;
     padding-right: 2px;
     bottom: 6px;
@@ -96,7 +97,14 @@
 
 .mat-card-actions{
     display: flex;
+    flex-wrap: wrap;
     justify-content: flex-end;
     padding: 0px;
     margin: 5px !important;
 }
+
+ @media only screen and (max-width: 480px) {
+   .sb-overview-container > div {
+     width: calc(100% - 20px);
+   }
+ }

@@ -14,24 +14,24 @@ export const INITIAL_STATE: IAppState = {
 export function rootReducer(state: IAppState, action): IAppState{
     switch (action.type) {
         case ADD_ITEM_TO_BACKLOG:
-            action.backlog.id = state.sbItemCollection.length + 1;    
-            action.backlog.category = 'backlog';
+            action.newSbItem.id = state.sbItemCollection.length + 1;    
+            action.newSbItem.category = 'backlog';
             return Object.assign({}, state, {
-                sbItemCollection: state.sbItemCollection.concat(Object.assign({}, action.backlog)),
+                sbItemCollection: state.sbItemCollection.concat(Object.assign({}, action.newSbItem)),
                 lastUpdate: new Date()
             })
         case UPDATE_ITEM:
-            var editedBacklogItem = state.sbItemCollection.find(t => t.id === action.id);
+            var editedBacklogItem = state.sbItemCollection.find(t => t.id === action.modifiedSbItem.id);
             var index = state.sbItemCollection.indexOf(editedBacklogItem);
             return Object.assign({}, state, {
                 sbItemCollection: [
                     ...state.sbItemCollection.slice(0, index),
-                    Object.assign({}, editedBacklogItem, {title: editedBacklogItem.title, 
-                        description: editedBacklogItem.description,
-                        storyPoints: editedBacklogItem.storyPoints,
-                        category: editedBacklogItem.category,
-                        issueTypeName: editedBacklogItem.issueTypeName,
-                        issueTypeCode: editedBacklogItem.issueTypeCode }),
+                    Object.assign({}, editedBacklogItem, {id: action.modifiedSbItem.id,
+                        title: action.modifiedSbItem.title, 
+                        description: action.modifiedSbItem.description,
+                        storyPoints: action.modifiedSbItem.storyPoints,
+                        category: action.modifiedSbItem.category,
+                        issueType: action.modifiedSbItem.issueType }),
                     ...state.sbItemCollection.slice(index+1)
                 ],
                 lastUpdate: new Date()
