@@ -1,10 +1,12 @@
 import { ScrumBoardItem } from "./sb.model";
-import { ADD_ITEM_TO_BACKLOG, UPDATE_ITEM, REMOVE_ITEM } from "./redux-actions";
+import { ADD_ITEM_TO_BACKLOG, UPDATE_ITEM, REMOVE_ITEM, GET_SB_ITEMS } from "./redux-actions";
 
 export interface IAppState{
     sbItemCollection: ScrumBoardItem[];
     lastUpdate: Date;
 }
+
+
 
 export const INITIAL_STATE: IAppState = {
     sbItemCollection: [],
@@ -13,9 +15,16 @@ export const INITIAL_STATE: IAppState = {
 
 export function rootReducer(state: IAppState, action): IAppState{
     switch (action.type) {
+        case GET_SB_ITEMS:
+        let a = Object.assign({}, state, {
+            sbItemCollection: action.sbItemCollectionFromServer,
+            lastUpdate: new Date()
+        })
+        console.log(a);
+            return a
         case ADD_ITEM_TO_BACKLOG:
-            action.newSbItem.id = state.sbItemCollection.length + 1;    
-            action.newSbItem.category = 'backlog';
+        //    action.newSbItem.id = state.sbItemCollection.length + 1;    
+           // action.newSbItem.category = 'backlog';
             return Object.assign({}, state, {
                 sbItemCollection: state.sbItemCollection.concat(Object.assign({}, action.newSbItem)),
                 lastUpdate: new Date()

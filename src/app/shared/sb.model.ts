@@ -4,7 +4,7 @@ export interface IssueType{
     code: string
 }
 export interface ScrumBoardItem {
-    id:number;
+    id:string;
     title: string;
     description: string;
     storyPoints: string;

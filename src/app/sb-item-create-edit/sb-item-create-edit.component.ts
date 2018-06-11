@@ -16,7 +16,7 @@ export class SbItemCreateEditComponent implements OnInit {
   
   sbIssueTypeList: IssueType[] = [];
   sbItemModel: ScrumBoardItem = {
-    id:0,
+    id:"",
     title: "",
     description: "",
     storyPoints: "",
@@ -37,18 +37,25 @@ export class SbItemCreateEditComponent implements OnInit {
     }
   }
 
+  compareFn(issueType1: IssueType, issueType2: IssueType): boolean {
+    return issueType1 && issueType2 ? issueType1.code === issueType2.code : issueType1 === issueType2;
+  }
+
   ngOnInit() {
   }
 
   createSbItem(){
-    this.ngRedux.dispatch({type: ADD_ITEM_TO_BACKLOG, newSbItem: this.sbItemModel});
+    this.sbItemModel.category = "backlog";
+    this.sbService.addSbItemToServer(this.sbItemModel);
+    //this.ngRedux.dispatch({type: ADD_ITEM_TO_BACKLOG, newSbItem: this.sbItemModel});
     this.onCancelClick();
   }
 
   onUpdateClick(){
     console.log(this.sbItemModel.id);
     debugger;
-    this.ngRedux.dispatch({type: UPDATE_ITEM, modifiedSbItem: this.sbItemModel });
+    this.sbService.updateSbItem(this.sbItemModel);
+   // this.ngRedux.dispatch({type: UPDATE_ITEM, modifiedSbItem: this.sbItemModel });
     this.onCancelClick();
   }
 

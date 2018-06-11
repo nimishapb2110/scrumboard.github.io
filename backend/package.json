@@ -1,0 +1,11 @@
+{
+  "name": "scrum-board-app",
+  "version": "0.0.0",
+   "private": true,
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "bootstrap": "^4.1.1",
+    "express": "^4.16.3",
+    "mongoose": "^5.1.4"
+  }
+}

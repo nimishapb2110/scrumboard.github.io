@@ -10,7 +10,11 @@
       <textarea  matInput [(ngModel)]="sbItemModel.storyPoints" placeholder="Story Points" name="sbItemStoryPoints"></textarea>
     </mat-form-field>
     <mat-form-field>
-      <mat-select placeholder="Select Issue Type"  [(ngModel)]="sbItemModel.issueType" name="sbItemTsype" required>
+      <mat-select placeholder="Select Issue Type"  
+      [(ngModel)]="sbItemModel.issueType" 
+      name="sbItemTsype" 
+      [compareWith]="compareFn"
+      required>
         <mat-option *ngFor="let type of sbIssueTypeList" [value]="type">{{ type.name }}</mat-option>
       </mat-select>
     </mat-form-field>

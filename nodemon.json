@@ -1,0 +1,6 @@
+{
+    "env": {
+      "MONGO_ATLAS_USER": "nimishapb",
+      "MONGO_ATLAS_PW": "BZ8Mh1JkQswSSI06"
+    }
+  }

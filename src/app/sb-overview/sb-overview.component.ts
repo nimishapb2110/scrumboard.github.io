@@ -4,6 +4,7 @@ import { SbItemCreateEditComponent } from '../sb-item-create-edit/sb-item-create
 import { select, NgRedux } from '@angular-redux/store';
 import { IAppState } from '../shared/redux-store';
 import { UPDATE_ITEM, REMOVE_ITEM } from '../shared/redux-actions';
+import { ScrumBoardService } from '../shared/sb.service';
 
 @Component({
   selector: 'app-sb-overview',
@@ -15,11 +16,12 @@ export class SbOverviewComponent implements OnInit {
   sbStatusList: string[];
   //currentHeader: string = "";
   @select() sbItemCollection;
-  constructor(public dialog: MatDialog, private ngRedux: NgRedux<IAppState>) { 
+  constructor(public dialog: MatDialog, private ngRedux: NgRedux<IAppState>, public sbService:ScrumBoardService) { 
     this.sbStatusList = ['backlog', 'plan', 'develop', 'test', 'deploy', 'done'];
   }
 
   ngOnInit() {
+    this.sbService.getSbItemsFromServer()
   }
 
   onAddItemClick(){
@@ -40,11 +42,13 @@ export class SbOverviewComponent implements OnInit {
   }
 
   moveCategory(item){
-    this.ngRedux.dispatch({type: UPDATE_ITEM, modifiedSbItem: item });
+    this.sbService.updateSbItem(item);
+    //this.ngRedux.dispatch({type: UPDATE_ITEM, modifiedSbItem: item });
   }
 
   onRemoveItemFromBoard(item) {
-    this.ngRedux.dispatch({type: REMOVE_ITEM, id: item.id });
+    this.sbService.deleteSbItem(item.id);
+   // this.ngRedux.dispatch({type: REMOVE_ITEM, id: item.id });
   }
 
   openEditDialog(backlogList): void {
